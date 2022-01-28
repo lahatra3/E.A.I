@@ -28,7 +28,7 @@ try{
                     else throw new Exception("Methode d'authentification et/ou paramètres vides ...!", http_response_code(400));
                 break;
                 case 'get':
-                    if(!empty(trim($url[1]))){
+                    if(!empty(trim($url[1]))) {
                         require_once('./controllers/getters.php');
                         switch($url[1]){
                             case 'etudiants':
@@ -55,6 +55,7 @@ try{
                                 }
                                 else throw new Exception("Methode getImpression invalide ...!", http_response_code(400));
                             break;
+                            default: throw new Exception("Met get invalide ...!", http_response_code(404));
                         }
                     }
                     else throw new Exception("Methode get vide ...!", http_response_code(400));

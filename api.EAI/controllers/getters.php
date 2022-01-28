@@ -16,11 +16,7 @@ class ControllersGetEtudiants{
 }
 
 class ControllersGetImpressions{
-    private string $data;
-    private function __construct(){
-        $this -> data = 'eai';
-    }
-
+    
     public function obtenirToutImpressions(){
         $get = new Impressions();
         $resultats = $get -> getAllImpressions();

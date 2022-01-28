@@ -1,20 +1,13 @@
 <?php
-abstract class Database{
-    private string $nom_hote;
-    private string $database;
-    private string $utilisateur;
-    private string $password;
+class Database{
+    private $nom_hote = 'localhost';
+    private $database = 'eai';
+    private $utilisateur = 'jitiy';
+    private $password = '01Lah_tr*@ro0t/*';
 
-    private function __construct() {
-        $this -> nom_hote = 'localhost';
-        $this -> database = 'eai';
-        $this -> utilisateur = 'jitiy';
-        $this -> password = '01Lah_tr*@ro0t/*';
-    }
-
-    protected function db_connect():object {
+    protected function db_connect() {
         try{
-            return new PDO("mysql:host=localhost; dbname=$this -> database; charset=utf8", 
+            return new PDO("mysql:host=localhost; dbname=".$this -> database."; charset=utf8", 
                 $this -> utilisateur, $this -> password, 
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }
@@ -28,15 +21,11 @@ abstract class Database{
 }
 
 class Etudiants extends Database{
-    private string $data;
-    private function __construct(){
-        $this -> data = 'eai';
-    }
 
     public function getEtudiants(array $donnees):array{
         try{
             $database = Database::db_connect();
-            $demande = $database -> prepare('SELECT nom, prenoms, prenom_usuel, email, promotions, ecole_superieure, filiere
+            $demande = $database -> prepare('SELECT nom, prenoms, prenom_usuel, email, promotions, ecole_superieure, filière
                 FROM etudiants
                 WHERE prenom_usuel = :prenom
             '); 
@@ -59,7 +48,7 @@ class Etudiants extends Database{
         try{
             $database = Database::db_connect();
             $demande = $database -> prepare('INSERT INTO etudiants (nom, prenoms, prenom_usuel, email, promotions,
-             ecole_superieure, filiere, keyword)
+             ecole_superieure, filière, keyword)
              VALUES(:nom, :prenoms, :prenom_usuel, :email, :promotions, :ecole, :filiere, SHA2(:keyword, 256))');
             $demande -> execute($donnees);
             $database -> commit();
@@ -76,10 +65,6 @@ class Etudiants extends Database{
 } 
 
 class Impressions extends Database{
-    private string $data;
-    private function __construct(){
-        $this -> data = 'eai';
-    }
 
     public function getAllImpressions():array{
         try{
@@ -89,7 +74,7 @@ class Impressions extends Database{
                 JOIN etudiants e ON e.id = i.id_etudiant
             ');
             $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
-            $demande -> cursorClose();
+            $demande -> closeCursor();
             return $reponses;
         }
         catch(PDOException $e){
@@ -116,7 +101,7 @@ class Impressions extends Database{
             ');
             $demande -> execute($donnees);
             $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
-            $demande -> cursorClose();
+            $demande -> closeCursor();
             return $reponses;
         }
         catch(PDOException $e){
@@ -149,10 +134,6 @@ class Impressions extends Database{
 }
 
 class Login extends Database{
-    private string $data;
-    private function __construct(){
-        $this -> data = 'eai';
-    }
 
     public function authentifier(array $donnees){
         try{
@@ -163,7 +144,7 @@ class Login extends Database{
             ');
             $demande -> execute($donnees);
             $reponses = $demande -> fetchAll(PDO::ASSOC_FETCH);
-            $demande -> cursorClose();
+            $demande -> closeCursor();
             return $reponses;
         }
         catch(PDOException $e){
