@@ -1,5 +1,4 @@
 <?php
-require_once('../models/models.php');
 class ControllersGetEtudiants{
     private array $data;
     public function __construct(string $param){

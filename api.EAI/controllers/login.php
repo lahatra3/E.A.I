@@ -1,23 +1,25 @@
 <?php
-require_once('../models/models.php');
+class ControllersLogin{
+    private array $data;
 
-try{
-    if(!empty(trim($_POST['identifiant'])) && !empty(trim($_POST['keyword']))) {
-        $infos = [
-            'identifiant' => strip_tags($_POST['identifiant']),
-            'keyword' => $_POST['keyword']
+    public function __construct(string $identifiant, string $keyword) {
+        $this -> data = [
+            'identifiant' => strip_tags($identifiant),
+            'keyword' => $keyword
         ];
+    }
+
+    public function apiLogin(){
         $auth = new Login();
-        $data = $auth -> authentifier($infos);
+        $data = $auth -> authentifier($this -> data);
         unset($auth);
         print_r(json_encode($data, JSON_FORCE_OBJECT));
     }
-    else throw new Exception("Les paramètres de login sont vides ...!", http_response_code(400));
-}
-catch(Exception $e){
-    print_r(json_encode([
-        'status' => false,
-        'message' => $e -> getMessage(),
-        'code' => $e -> getCode()
-    ], JSON_FORCE_OBJECT));
+
+    public function sessionLogin() {
+        $auth = new Login();
+        $data = $auth -> authentifier($this -> data);
+        unset($auth);
+        if(!empty($data['status']) && $data['status'] == '1') $_SESSION['infos'] = $data;
+    }
 }
