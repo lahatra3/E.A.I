@@ -107,8 +107,12 @@ class Impressions extends Database{
             $demande = $database -> prepare('SELECT i.messages, i.fichiers, i.date_envoie, e.prenom_usuel, e.promotions
                 FROM impressions i
                 JOIN etudiants e ON i.id_etudiant = e.id
-                WHERE (e.prenom_usuel = :prenom OR i.date_envoie = :date_envoie) 
-                OR (e.prenom_usuel = :prenom AND i.date_envoie = :date_envoie)
+                WHERE ((e.prenom_usuel LIKE "%:prenom%" OR i.date_envoie LIKE "%:date_envoie%") 
+                    OR SOUNDEX(:prenom) = SOUNDEX(e.prenom_usuel)
+                    SOUNDEX(:date_envoie) = SOUNDEX(i.date_envoie)) 
+                OR ((e.prenom_usuel LIKE "%:prenom%" AND i.date_envoie LIKE "%:date_envoie%") 
+                    OR SOUNDEX(:prenom) = SOUNDEX(e.prenom_usuel)
+                    SOUNDEX(:date_envoie) = SOUNDEX(i.date_envoie))
             ');
             $demande -> execute($donnees);
             $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
