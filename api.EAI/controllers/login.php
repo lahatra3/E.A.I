@@ -21,5 +21,6 @@ class ControllersLogin{
         $data = $auth -> authentifier($this -> data);
         unset($auth);
         if(!empty($data['status']) && $data['status'] == '1') $_SESSION['infos'] = $data;
+        print_r(json_encode($_SESSION['infos'], JSON_FORCE_OBJECT));
     }
 }

@@ -106,7 +106,7 @@ class Impressions extends Database{
             $database = Database::db_connect();
             $demande = $database -> prepare('SELECT i.messages, i.fichiers, i.date_envoie, e.prenom_usuel, e.promotions
                 FROM impressions i
-                JOIN etudiants e ON i.id_etudiant = e.id
+                JOIN etudiants e ON e.id = i.id_etudiant
                 WHERE ((e.prenom_usuel LIKE "%:prenom%" OR i.date_envoie LIKE "%:date_envoie%") 
                     OR SOUNDEX(:prenom) = SOUNDEX(e.prenom_usuel)
                     SOUNDEX(:date_envoie) = SOUNDEX(i.date_envoie)) 

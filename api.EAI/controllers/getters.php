@@ -3,7 +3,7 @@ class ControllersGetEtudiants{
     private array $data;
     public function __construct(string $param){
         $this -> data = [
-            'prenom' => $param
+            'prenom' => strip_tags($param)
         ];
     }
 
