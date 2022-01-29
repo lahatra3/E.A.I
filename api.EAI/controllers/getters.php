@@ -7,6 +7,13 @@ class ControllersGetEtudiants{
         ];
     }
 
+    public function obtenirToutEtudiants(){
+        $get = new Etudiants();
+        $resultats = $get -> getAllEtudiants();
+        unset($resultats);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    }
+
     public function obtenirEtudiants(){
         $get = new Etudiants();
         $resultats = $get -> getEtudiants($this -> data);

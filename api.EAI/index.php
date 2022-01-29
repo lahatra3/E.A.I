@@ -34,10 +34,19 @@ try{
                             case 'etudiants':
                                 if(!empty(trim($url[2]))) {
                                     $getEtudiant = new ControllersGetEtudiants($url[2]);
-                                    $getEtudiant -> obtenirEtudiants();
+                                    switch($url[2]){
+                                        case '*':
+                                            $getEtudiant -> obtenirToutEtudiants();
+                                        break;
+                                        
+                                        case preg_match("#^[a-zA-Z ]$#", $url[2]):
+                                            $getEtudiant -> obtenirEtudiants();
+                                        break;
+                                        default: throw new Exception("Paramètre inconnue ...!", http_response_code(404));
+                                    }
+                                    unset($getEtudiant);
                                 }
                                 else throw new Exception("Methode getEtudiant invalide ...!", http_response_code(400));
-                                unset($getEtudiant);
                             break;
                             case 'impressions':
                                 if(!empty(trim($url[2]))) {

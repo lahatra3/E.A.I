@@ -22,6 +22,24 @@ class Database{
 
 class Etudiants extends Database{
 
+    public function getAllEtudiants(){
+        try{
+            $database = Database::db_connect();
+            $demande = $database -> query('SELECT nom, prenoms, prenom_usuel, email, promotions, ecole_superieure, filière
+                FROM etudiants');
+            $reponses = $demande -> fetchAll(PDO::FETCH_ASSOC);
+            $demande -> closeCursor();
+            return $reponses;
+        }
+        catch(PDOException $e){
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: aucune donnée `Etudiants Tout` obtenue !".$e -> getMessage()
+            ], JSON_FORCE_OBJECT));
+        }
+        $database = null;
+    }
+
     public function getEtudiants(array $donnees):array{
         try{
             $database = Database::db_connect();
