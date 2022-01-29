@@ -38,11 +38,7 @@ try{
                                         case '*':
                                             $getEtudiant -> obtenirToutEtudiants();
                                         break;
-                                        
-                                        case preg_match("#^[a-zA-Z ]$#", $url[2]):
-                                            $getEtudiant -> obtenirEtudiants();
-                                        break;
-                                        default: throw new Exception("Paramètre inconnue ...!", http_response_code(404));
+                                        default: $getEtudiant -> obtenirEtudiants();
                                     }
                                     unset($getEtudiant);
                                 }
