@@ -1,9 +1,9 @@
 <?php
 class Database{
-    private $nom_hote = 'localhost';
-    private $database = 'eai';
-    private $utilisateur = 'jitiy';
-    private $password = '01Lah_tr*@ro0t/*';
+    private $nom_hote = '';
+    private $database = '';
+    private $utilisateur = '';
+    private $password = '';
 
     protected function db_connect() {
         try{
@@ -166,7 +166,10 @@ class Login extends Database{
             return $reponses;
         }
         catch(PDOException $e){
-            
+            print_r(json_encode([
+                'status' => false,
+                'message' => "Erreur: nous n'avons pas pu obtenir les données login !".$e->getMessage()
+            ], JSON_FORCE_OBJECT));
         }
         $database = null;
     }
