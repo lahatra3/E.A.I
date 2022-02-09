@@ -4,6 +4,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Max-Age: 3600");
+
 require_once('./models/models.php');
 try{
     if(!empty(trim($_GET['demande']))){
@@ -71,22 +72,12 @@ try{
                         $add = new ControllersAdd();
                         switch($url[1]){
                             case 'etudiants':
-                                if(!empty(trim($_POST['nom'])) && !empty(trim($_POST['prenoms']))
-                                 && !empty(trim($_POST['prenom_usuel'])) && !empty(trim($_POST['email']))
-                                 && !empty(trim($_POST['promotions'])) && !empty(trim($_POST['ecole'])) 
-                                 && !empty(trim($_POST['filiere'])) && !empty(trim($_POST['keyword']))) {
-                                    $add -> ajouterEtudiants($_POST['nom'], $_POST['prenoms'], $_POST['prenom_usuel'],
-                                    $_POST['email'], $_POST['promotions'], $_POST['ecole'], $_POST['filiere'], $_POST['keyword']);
-                                }
-                                else throw new Exception("Les paramètres Etudiants à inserer sont vides ...!", http_response_code(403));
+                                $add -> ajouterEtudiants($_POST['nom'], $_POST['prenoms'], $_POST['prenom_usuel'],
+                                $_POST['email'], $_POST['promotions'], $_POST['ecole'], $_POST['filiere'], $_POST['keyword']);
                             break;
                             case 'impressions':
-                                if(!empty(trim($_POST['messages'])) && !empty(trim($_POST['fichiers']))
-                                 && !empty(trim($_POST['date'])) && !empty(trim($_POST['id']))) {
-                                    $add -> ajouterImpressions($_POST['messages'], $_POST['fichiers'], 
-                                    $_POST['date'], $_POST['id']);
-                                 }
-                                 else throw new Exception("Les paramètres Etudiants à inserer sont vides ...!", http_response_code(403));
+                                $add -> ajouterImpressions($_POST['messages'], $_POST['fichiers'], 
+                                $_POST['date'], $_POST['id']);
                             break;
                             default: throw new Exception("Error Processing Request", http_response_code(404));
                         }
