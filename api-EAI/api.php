@@ -7,6 +7,8 @@ header("Access-Control-Max-Age: 3600");
 
 require_once './models/models.php';
 require_once './controllers/login.php';
+require_once './controllers/getters.php';
+require_once './controllers/adding.php';
 
 try{
     if(!empty(trim($_GET['demande']))){
@@ -34,7 +36,6 @@ try{
                 break;
                 case 'get':
                     if(!empty(trim($url[1]))) {
-                        require_once('./controllers/getters.php');
                         switch($url[1]){
                             case 'etudiants':
                                 if(!empty(trim($url[2]))) {
@@ -72,18 +73,17 @@ try{
                 break;
                 case 'add':
                     if(!empty(trim($url[1]))) {
-                        require_once('./controllers/adding.php');
                         $add = new ControllersAdd();
                         switch($url[1]){
                             case 'etudiants':
-                                $add -> ajouterEtudiants($_POST['nom'], $_POST['prenoms'], $_POST['prenom_usuel'],
+                                $add->ajouterEtudiants($_POST['nom'], $_POST['prenoms'], $_POST['prenom_usuel'],
                                 $_POST['email'], $_POST['promotions'], $_POST['ecole'], $_POST['filiere'], $_POST['keyword']);
                             break;
                             case 'impressions':
                                 $add -> ajouterImpressions($_POST['messages'], $_POST['fichiers'], 
                                 $_POST['date'], $_POST['id']);
                             break;
-                            default: throw new Exception("Erreur: la demande n'existe pas !");
+                            default: throw new Exception("Erreur: la demande n'existe pas ! URL $url[0]/$url[1] introuvable.");
                         }
                         unset($add);
                     }
@@ -99,7 +99,6 @@ try{
 catch(Exception $e){
     print_r(json_encode([
         'status' => false,
-        'message' => $e -> getMessage(),
-        'code' => $e -> getCode()
+        'message' => $e -> getMessage()
     ], JSON_FORCE_OBJECT));
 }
