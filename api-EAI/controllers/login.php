@@ -1,22 +1,30 @@
 <?php
 class ControllersLogin{
-    private array $resultats;
-    public function __construct(string $identifiant, string $keyword) {
+    public function apiLogin(string $identifiant, string $keyword){
         $infos = [
             'identifiant' => strip_tags($identifiant),
             'keyword' => $keyword
         ];
         $auth = new Login();
-        $this->resultats = $auth -> authentifier($infos);
+        $resultats = $auth -> authentifier($infos);
         unset($auth);
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
-    public function apiLogin(){
-        print_r(json_encode($data, JSON_FORCE_OBJECT));
+    public function sessionLogin(string $identifiant, string $keyword) {
+        $infos = [
+            'identifiant' => strip_tags($identifiant),
+            'keyword' => $keyword
+        ];
+        $auth = new Login();
+        $resultats = $auth -> authentifier($infos);
+        unset($auth);
+        $_SESSION['status'] = $resultats['status'];
+        $_SESSION['prenom_usuel'] = $resultats['prenom_usuel'];
+        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
-    public function sessionLogin() {
-        $_SESSION['infos'] = $this->resultats;
-        print_r(json_encode($_SESSION['infos'], JSON_FORCE_OBJECT));
+    public function getSession() {
+        print_r(json_encode($_SESSION, JSON_FORCE_OBJECT));
     }
 }
