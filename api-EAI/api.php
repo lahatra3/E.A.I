@@ -40,12 +40,12 @@ try{
                             case 'etudiants':
                                 if(!empty(trim($url[2]))) {
                                     $getEtudiant = new ControllersGetEtudiants($url[2]);
-                                    switch($url[2]){
-                                        case '*':
-                                            $getEtudiant -> obtenirToutEtudiants();
-                                        break;
-                                        default: $getEtudiant -> obtenirEtudiants();
-                                    }
+                                    // switch($url[2]){
+                                    //     case '*':
+                                    //         $getEtudiant -> obtenirToutEtudiants();
+                                    //     break;
+                                    //     default: $getEtudiant -> obtenirEtudiants();
+                                    // }
                                     unset($getEtudiant);
                                 }
                                 else throw new Exception("Methode getEtudiant invalide ...!");
@@ -64,9 +64,9 @@ try{
                                     }
                                     unset($getImpressions);
                                 }
-                                else throw new Exception("Methode getImpression invalide ...!", http_response_code(400));
+                                else throw new Exception("Methode getImpression invalide ...!");
                             break;
-                            default: throw new Exception("Met get invalide ...!", http_response_code(404));
+                            default: throw new Exception("Met get invalide ...!");
                         }
                     }
                     else throw new Exception("Methode get vide ...!");

@@ -1,12 +1,5 @@
 <?php
 class ControllersGetEtudiants{
-    private array $data;
-    public function __construct(string $param){
-        $this -> data = [
-            'prenom' => strip_tags($param)
-        ];
-    }
-
     public function obtenirToutEtudiants(){
         $get = new Etudiants();
         $resultats = $get -> getAllEtudiants();
