@@ -135,7 +135,7 @@ class Impressions extends Database {
         try{
             $database = Database::db_connect();
             $demande = $database -> prepare('INSERT INTO impressions(messages, fichiers, date_envoie, id_etudiant)
-                VALUES(:messages, :fichiers, :date_envoie, NOW(), :id_etudiant)
+                VALUES(:messages, :fichiers, NOW(), :id_etudiant)
             ');
             $demande->execute($donnees);
             $database->commit();

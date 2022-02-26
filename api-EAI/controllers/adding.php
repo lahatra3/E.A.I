@@ -24,12 +24,11 @@ class ControllersAdd {
         else throw new Exception("Erreur: un des paramètres entrée est vide 'ETUDIANTS'!");
     }
 
-    public function ajouterImpressions(string $messages, string $fichiers, string $date_envoie, string $id_etudiant) {
-        if(!empty(trim($messages)) && !empty(trim($fichiers)) && !empty(trim($date_envoie)) && !empty(trim($id_etudiant))) {
+    public function ajouterImpressions(string $messages, string $fichiers, string $id_etudiant) {
+        if(!empty(trim($messages)) && !empty(trim($fichiers)) && !empty(trim($id_etudiant))) {
             $infos = [
                 'messages' => strip_tags($messages),
                 'fichiers' => strip_tags($fichiers),
-                'date_envoie' => strip_tags($date_envoie),
                 'id_etudiant' => strip_tags($id_etudiant)
             ];
             $add = new Impressions();
