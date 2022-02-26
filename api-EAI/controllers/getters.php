@@ -1,17 +1,23 @@
 <?php
-class ControllersGetEtudiants{
-    public function obtenirToutEtudiants(){
+class ControllersGet {
+
+    public function toutEtudiants() {
         $get = new Etudiants();
-        $resultats = $get -> getAllEtudiants();
+        $resultats = $get->getAllEtudiants();
         unset($get);
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
-    public function obtenirEtudiants(){
-        $get = new Etudiants();
-        $resultats = $get -> getEtudiants($this -> data);
-        unset($get);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+    public function etudiants($identifiant) {
+        if(!empty(trim($identifiant))) {
+            $infos=[
+                'prenom_usuel' => strip_tags($identifiant)
+            ];
+            $get = new Etudiants();
+            $resultats = $get->getEtudiants($identifiant);
+            unset($get);
+            print_r(json_encode($resultats, JSON_FORCE_OBJECT));
+        }
     }
 }
 
