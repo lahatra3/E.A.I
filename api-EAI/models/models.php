@@ -104,17 +104,17 @@ class Impressions extends Database {
         $database = null;
     }
 
-    public function getImpressionsTriage(array $donnees):array {
+    public function getImpressionsSorted(array $donnees):array {
         try{
             $database = Database::db_connect();
             $demande = $database->prepare('SELECT i.messages, i.fichiers, i.date_envoie, e.prenom_usuel, e.promotions
                 FROM impressions i
                 JOIN etudiants e ON e.id = i.id_etudiant
-                WHERE ((e.prenom_usuel LIKE "%:prenom%" OR i.date_envoie LIKE "%:date_envoie%") 
-                    OR SOUNDEX(:prenom) = SOUNDEX(e.prenom_usuel)
+                WHERE ((e.prenom_usuel LIKE "%:prenom_usuel%" OR i.date_envoie LIKE "%:date_envoie%") 
+                    OR SOUNDEX(:prenom_usuel) = SOUNDEX(e.prenom_usuel)
                     SOUNDEX(:date_envoie) = SOUNDEX(i.date_envoie)) 
-                OR ((e.prenom_usuel LIKE "%:prenom%" AND i.date_envoie LIKE "%:date_envoie%") 
-                    OR SOUNDEX(:prenom) = SOUNDEX(e.prenom_usuel)
+                OR ((e.prenom_usuel LIKE "%:prenom_usuel%" AND i.date_envoie LIKE "%:date_envoie%") 
+                    OR SOUNDEX(:prenom_usuel) = SOUNDEX(e.prenom_usuel)
                     SOUNDEX(:date_envoie) = SOUNDEX(i.date_envoie))
             ');
             $demande->execute($donnees);
