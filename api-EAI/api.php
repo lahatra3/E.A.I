@@ -9,6 +9,9 @@ require_once './models/models.php';
 require_once './controllers/login.php';
 require_once './controllers/getters.php';
 require_once './controllers/adding.php';
+require_once './controllers/excel.php';
+require_once './vendor/autoload.php';
+
 
 try{
     if(!empty(trim($_GET['demande']))){
@@ -89,6 +92,12 @@ try{
                         unset($add);
                     }
                     else throw new Exception("Paramètre vide pour faire les insertions ...!");
+                break;
+
+                case 'excel':
+                    $excel=new Excel();
+                    $excel->getDataExcel();
+                    unset($excel);
                 break;
                 default: throw new Exception("Demande invalide pour le service ...!");
             }
