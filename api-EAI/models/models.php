@@ -156,12 +156,12 @@ class Login extends Database {
     public function authentifier(array $donnees) {
         try{
             $database = Database::db_connect();
-            $demande = $database -> prepare('SELECT True AS "status",  prenom_usuel
+            $demande = $database -> prepare('SELECT True AS "true",  prenom_usuel
                 FROM etudiants
-                WHERE (email = :identifiant OR prenom_usuel = :identifiant) AND keyword = :keyword    
+                WHERE (email = :identifiant OR prenom_usuel = :identifiant) AND keyword = SHA2(:keyword, 256)   
             ');
             $demande -> execute($donnees);
-            $reponses = $demande -> fetch(PDO::ASSOC_FETCH);
+            $reponses = $demande -> fetch(PDO::FETCH_ASSOC);
             $demande -> closeCursor();
             return $reponses;
         }

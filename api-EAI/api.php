@@ -20,7 +20,7 @@ try{
 
             // ***************** FOR LOGGING *****************
             switch($url[0]) {
-                case 'log':
+                case 'login':
                     if(!empty(trim($url[1]))){
                         $log=new ControllersLogin();
                         switch($url[1]){

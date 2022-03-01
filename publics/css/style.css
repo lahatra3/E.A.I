@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Z003';
+    src: url('../fonts/Z003-MediumItalic.ttf');
+}
+
+
 * {
     margin: 0%;
     padding: 0%;
@@ -9,7 +15,7 @@ body {
 
 #titreLogin {
     color: #057885;
-    font-family: sans-serif;
+    font-family: 'Z003';
     font-weight: bold;
 }
 
@@ -21,8 +27,11 @@ body {
 #identifiant:hover,
 #keyword:hover {
     scale: 1.03;
-    /* box-shadow: 6px 3px 10px rgba(0, 0, 0, 0.207),
-    -6px 0px 10px rgba(0, 0, 0, 0.083); */
     box-shadow: 6px 3px 10px #05788546,
         -6px 0px 10px #0578854a;
+}
+
+#connexion:hover {
+    background: #057885;
+    border: 1px outset #057885;
 }
