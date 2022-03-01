@@ -12,3 +12,17 @@ body {
     font-family: sans-serif;
     font-weight: bold;
 }
+
+#identifiant,
+#keyword {
+    transition: scale 0.5s;
+}
+
+#identifiant:hover,
+#keyword:hover {
+    scale: 1.03;
+    /* box-shadow: 6px 3px 10px rgba(0, 0, 0, 0.207),
+    -6px 0px 10px rgba(0, 0, 0, 0.083); */
+    box-shadow: 6px 3px 10px #05788546,
+        -6px 0px 10px #0578854a;
+}
