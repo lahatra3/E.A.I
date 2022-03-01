@@ -47,7 +47,7 @@ try{
                         switch($url[1]) {
                             case 'etudiants':
                                 if(!empty(trim($url[2]))) {
-                                    if(preg_match("#é~\"#'{}()[]|`_\\°=+^.-]#", $url[2])) {
+                                    if(preg_match("#é~\"{}()[]|`_\\°=+^.-]#", $url[2])) {
                                         throw new Exception("Erreur: $url[0]/$url[1]/$url[2] est introuvable !");
                                     }
                                     elseif($url[2] === "*") $get->toutEtudiants();
@@ -96,6 +96,7 @@ try{
 
                 case 'excel':
                     $excel=new Excel();
+                    $excel->addDataExcel();
                     $excel->getDataExcel();
                     unset($excel);
                 break;

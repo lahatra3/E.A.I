@@ -8,6 +8,17 @@ class Excel {
         $reader=IOFactory::createReader("Xlsx");
         $spreadsheet=$reader->load('../publics/xlsx/matrice.xlsx');
         $writer=IOFactory::createWriter($spreadsheet, "Html");
-        print_r($writer->save("php://output"));
+        return $writer->save("php://output");
+    }
+
+    public function addDataExcel() {
+        $reader=IOFactory::createReader("Xlsx");
+        $spreadsheet=$reader->load('../publics/xlsx/matrice.xlsx');
+        $ajouter=$spreadsheet->getActiveSheet();
+        
+        $ajouter->setCellValue('A2', 'Lahatra');
+        $ajouter->setCellValue('B2', 'ESTI');
+        $writer=IOFactory::createWriter($spreadsheet, "Xlsx");
+        $writer->save('../publics/xlsx/matrice.xlsx');
     }
 }
