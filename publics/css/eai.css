@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'Z003';
+    src: url('../fonts/Z003-MediumItalic.ttf');
+}
+
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+header {
+    background: #057885;
+}
+
+.titre {
+    font-family: 'Z003';
+    color: #FFFFFF;
+}
+
+body {
+    background: url('../images/logo.svg') center fixed no-repeat;
+}
+
+.offcanvasMenu {
+    border-top-right-radius: 3rem !important;
+    border-bottom-right-radius: .25rem !important;
+}
