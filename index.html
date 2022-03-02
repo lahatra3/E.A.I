@@ -20,8 +20,8 @@
                         <div class="col-md-6">
                             <img src="publics/images/bg.svg" class="img-fluid rounded-start" alt="eai">
                         </div>
-                        <div class="col-md-6 shadow form-group p-3" style="background: #FFFFFF; border-radius: 2rem;">
-                            <div class="card-body">
+                        <div id="pages" class="col-md-6 shadow form-group p-3" style="background: #FFFFFF; border-radius: 2rem;">
+                            <div id="authentification" class="card-body">
                                 <h1 id="titreLogin" class="card-title text-center rounded-pill">Bienvenu sur E.A.I</h1>
                                 <p class="card-text pt-md-3">
                                     <div class="form-floating">
@@ -55,7 +55,9 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-12 text-end">
-                                            <button type="button" id="inscrire" class="btn btn-link rounded-pill">s'inscrire</button>
+                                            <button type="button" id="inscrire" class="btn btn-link rounded-pill" 
+                                                data-bs-toggle="modal" data-bs-target="#inscriptionModal"
+                                                data-bs-whatever="@getbootstrap">s'inscrire</button>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -71,6 +73,70 @@
             </div>
         </div>
     </div>
+
+    <!-- ************************ MODAL INSCRIPTION ******************** -->
+    <div class="modal fade" id="inscriptionModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="inscriptionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-3">
+                <div class="modal-header" style="background: #057885;">
+                    <h5 class="modal-title text-light" id="inscriptionModalLabel">S'inscrire</h5>
+                    <button type="button" class="btn-close annulerInscription" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-light">
+                    <!-- ********************************************************* -->
+                    <form class="row g-3" id="formulaireInscription">
+                        <div class="col-md-6 text-center">
+                            <label for="nom" class="form-label">Nom:</label>
+                            <input type="text" class="form-control rounded-pill" id="nom" required>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label for="prenoms" class="form-label">Prenom(s):</label>
+                            <input type="text" class="form-control rounded-pill" id="prenoms" required>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label for="prenom_usuel" class="form-label">Prenom usuel:</label>
+                            <input type="text" class="form-control rounded-pill" id="prenom_usuel" required>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control rounded-pill" id="email" required>
+                        </div>
+                        <div class="col-12 text-center text-danger" id="erreurInscription"></div>
+                        <div class="col-md-6 text-center">
+                            <label for="es" class="form-label">École supérieure:</label>
+                            <input type="text" class="form-control rounded-pill" id="es" required>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label for="filiere" class="form-label">Filière:</label>
+                            <input type="text" class="form-control rounded-pill" id="filiere" required>
+                        </div>
+                        <div class="col-12 text-center">
+                            <label for="promotion" class="form-label">Promotion:</label>
+                            <select id="promotion" class="form-select rounded-pill" required></select>
+                        </div>
+                        <div class="col-12 text-center">
+                            <label for="password" class="form-label">Mot de passe:</label>
+                            <div class="input-group mb-3">
+                                <input id="password" type="password" class="form-control" placeholder="8 caractères au minimum ***"
+                                    aria-describedby="showPassword">
+                                <button class="btn btn-outline-primary" type="button" id="showPassword">
+                                    <i class="fa-solid fa-eye-slash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </form>
+                    <!-- ********************************************************* -->
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary rounded-pill annulerInscription" data-bs-dismiss="modal">Annuler</button>
+                    <button id="enregistrerInscription" type="button" class="btn btn-outline-primary rounded-pill">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- *************************************************************** -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script type="text/javascript" src="publics/js/jquery.min.js"></script>

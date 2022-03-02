@@ -80,8 +80,8 @@ try{
                         switch($url[1]) {
                             case 'etudiants':
                                 $add->ajouterEtudiants($_POST['nom'], $_POST['prenoms'], $_POST['prenom_usuel'],
-                                    $_POST['email'], $_POST['promotions'], $_POST['ecole'], $_POST['filiere'],
-                                     $_POST['keyword']);
+                                    $_POST['email'], $_POST['promotion'], $_POST['es'], $_POST['filiere'],
+                                     $_POST['password']);
                             break;
                             case 'impressions':
                                 $add -> ajouterImpressions($_POST['messages'], $_POST['fichiers'], 

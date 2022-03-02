@@ -35,3 +35,9 @@ body {
     background: #057885;
     border: 1px outset #057885;
 }
+
+#formulaireInscription label,
+#formulaireInscription input
+#formulaireInscription select option {
+    color: #057885;
+}

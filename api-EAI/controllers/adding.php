@@ -7,19 +7,23 @@ class ControllersAdd {
         !empty(trim($email)) && !empty(trim($promotions)) && !empty(trim($ecole)) &&
         !empty(trim($filiere)) && !empty(trim($keyword))) {
             $infos = [
-                'nom' => strip_tags($nom),
+                'nom' => strip_tags(trim($nom)),
                 'prenoms' => strip_tags(ucwords($prenoms)),
-                'prenom_usuel' => strip_tags($prenom_usuel),
-                'email' => strip_tags($email),
-                'promotions' => strip_tags($promotions),
-                'ecole' => strip_tags($ecole),
-                'filiere' => strip_tags($filiere),
+                'prenom_usuel' => strip_tags(trim($prenom_usuel)),
+                'email' => strip_tags(trim($email)),
+                'promotions' => strip_tags(trim($promotions)),
+                'ecole' => strip_tags(trim($ecole)),
+                'filiere' => strip_tags(trim($filiere)),
                 'keyword' => $keyword
             ];
+            $infosVerifier=[
+                'prenom_usuel' => strip_tags(trim($prenom_usuel)),
+                'email' => strip_tags(trim($email))
+            ];
             $add = new Etudiants();
-            $add -> addEtudiants($infos);
+            $data = $add -> addEtudiants($infos, $infosVerifier);
             unset($add);
-            echo '1';
+            echo $data;
         }
         else throw new Exception("Erreur: un des paramètres entrée est vide 'ETUDIANTS'!");
     }
