@@ -81,7 +81,7 @@ try{
                             case 'etudiants':
                                 $add->ajouterEtudiants($_POST['nom'], $_POST['prenoms'], $_POST['prenom_usuel'],
                                     $_POST['email'], $_POST['promotion'], $_POST['es'], $_POST['filiere'],
-                                     $_POST['password']);
+                                    $_POST['foyer'], $_POST['password']);
                             break;
                             case 'impressions':
                                 $add -> ajouterImpressions($_POST['messages'], $_POST['fichiers'], 
@@ -95,12 +95,21 @@ try{
                 break;
 
                 case 'excel':
-                    $excel=new Excel();
-                    $excel->addDataExcel();
-                    $excel->getDataExcel();
-                    unset($excel);
+                    if(!empty(trim($url[1]))) {
+                        $excel=new Excel();
+                        switch($url[1]) {
+                            case 'get':
+                                $excel->getDataExcel();
+                            break;
+                            case 'add':
+                                $excel->addDataExcel();
+                            break;
+                            default: throw new Exception("Erreur: la demande n'existe pas ! URL $url[0]/$url[1] introuvable.");
+                        }
+                        unset($excel);
+                    }
                 break;
-                default: throw new Exception("Demande invalide pour le service ...!");
+                default: throw new Exception("Demande invalide par le service ...!");
             }
         }
         else throw new Exception("La demande est vide. URL $url[0] invalide !");

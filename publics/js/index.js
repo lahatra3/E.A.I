@@ -3,7 +3,7 @@ $(document).ready(function() {
     $('#connexion').click(function(event) {
         event.preventDefault();
         if($('#identifiant').val().trim().length!==0 && $('#keyword').val().trim().length!==0) {
-            $.post('./api-EAI/api.php?demande=login/api', {
+            $.post('./api-EAI/api.php?demande=login/session', {
                 identifiant: $('#identifiant').val(),
                 keyword: $('#keyword').val()
             }, function(data, status) {
@@ -23,7 +23,8 @@ $(document).ready(function() {
         if($('#nom').val().trim().length!==0 && $('#prenoms').val().trim().length!==0 &&
             $('#prenom_usuel').val().trim().length!==0 && $('#email').val().trim().length!==0 &&
             $('#es').val().trim().length!==0 && $('#filiere').val().trim().length!==0 &&
-            $('#promotion').val().trim().length!==0 && $('#password').val().trim().length!==0) {
+            $('#promotion').val().trim().length!==0 && $('#foyer').val().trim().length!==0 &&
+            $('#password').val().trim().length!==0) {
 
             $.post('./api-EAI/api.php?demande=add/etudiants', {
                 nom: $('#nom').val(),
@@ -33,10 +34,11 @@ $(document).ready(function() {
                 promotion: $('#promotion').val(),
                 es: $('#es').val(),
                 filiere: $('#filiere').val(),
+                foyer: $('#foyer').val(),
                 password: $('#password').val()
             }, function(data, status) {
-                if(status === "success" && data === "1") {
-                    $.post('./api-EAI/api.php?demande=login/api', {
+                if(status === "success" && data === 1) {
+                    $.post('./api-EAI/api.php?demande=login/session', {
                         identifiant: $('#email').val(),
                         keyword: $('#password').val()
                     }, function(data, status) {
@@ -50,7 +52,7 @@ $(document).ready(function() {
                 }
                 else {
                     $('#erreurInscription').html('Cet email ou ce prenom usuel existe déjà. Merci !')
-                    console.log(status+"\n"+data);
+                    console.log(status+"\n"+data +"\n");
                 }
             });
         }
@@ -59,7 +61,7 @@ $(document).ready(function() {
     // ****************************** ANNULER INSCRIPTION *****************************
     $('.annulerInscription').click(function(event) {
         event.preventDefault();
-        $('#nom, #prenoms, #prenom_usuel, #email, #es, #filiere, #password').val('');
+        $('#nom, #prenoms, #prenom_usuel, #email, #es, #filiere, #password, #foyer').val('');
         $('#promotion').val('2018');
         $('#erreurInscription').html('');
     });

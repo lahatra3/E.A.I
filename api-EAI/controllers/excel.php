@@ -20,5 +20,6 @@ class Excel {
         $ajouter->setCellValue('B2', 'ESTI');
         $writer=IOFactory::createWriter($spreadsheet, "Xlsx");
         $writer->save('../publics/xlsx/matrice.xlsx');
+        echo 1;
     }
 }

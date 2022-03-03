@@ -8,8 +8,8 @@ class ControllersGet {
         print_r(json_encode($resultats, JSON_FORCE_OBJECT));
     }
 
-    public function etudiants(string $prenom_usuel="") {
-        if(!empty(trim($identifiant))) {
+    public function etudiants(string $prenom_usuel) {
+        if(!empty(trim($prenom_usuel))) {
             $infos=[
                 'prenom_usuel' => strip_tags(trim($prenom_usuel))
             ];
@@ -29,7 +29,7 @@ class ControllersGet {
     }
 
     public function sortImpressions(string $prenom_usuel="", string $date_envoie="") {
-        if(!empty(trim($identifiant))) {
+        if(!empty(trim($prenom_usuel))) {
             $infos=[
                 'prenom_usuel' => strip_tags(trim($prenom_usuel)),
                 'date_envoie' => strip_tags(trim($date_envoie))

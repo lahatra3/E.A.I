@@ -25,7 +25,8 @@ class Etudiants extends Database {
     public function getAllEtudiants():array {
         try{
             $database = Database::db_connect();
-            $demande = $database->query('SELECT nom, prenoms, prenom_usuel, email, promotions, ecole_superieure, filière
+            $demande = $database->query('SELECT nom, prenoms, prenom_usuel, email, promotions,
+                    ecole_superieure, filiere, foyer, photo
                 FROM etudiants');
             $reponses = $demande->fetchAll(PDO::FETCH_ASSOC);
             $demande->closeCursor();
@@ -43,7 +44,8 @@ class Etudiants extends Database {
     public function getEtudiants(array $donnees) {
         try{
             $database = Database::db_connect();
-            $demande = $database->prepare('SELECT nom, prenoms, prenom_usuel, email, promotions, ecole_superieure, filière
+            $demande = $database->prepare('SELECT nom, prenoms, prenom_usuel, email, promotions,
+                    ecole_superieure, filiere, foyer, photo
                 FROM etudiants
                 WHERE prenom_usuel = :prenom_usuel
             '); 
@@ -64,24 +66,24 @@ class Etudiants extends Database {
 
     protected function verifierEtudiants(array $donnees) {
         $database=Database::db_connect();
-        $demande=$database->prepare('SELECT True FROM etudiants
+        $demande=$database->prepare('SELECT id FROM etudiants
             WHERE prenom_usuel=:prenom_usuel OR
              email=:email');
         $demande->execute($donnees);
         $reponses=$demande->fetch(PDO::FETCH_ASSOC);
         $demande->closeCursor();
-        return $reponses['TRUE'];
+        $status= (empty($reponses)? 0 : 1);
+        return $status;
     }
 
     public function addEtudiants(array $donnees, array $verifier) {
         try{
-            if($this->verifierEtudiants($verifier) !== 1) {
-                $database = Database::db_connect();
-                $demande = $database->prepare('INSERT INTO etudiants (nom, prenoms, prenom_usuel, email, promotions,
-                        ecole_superieure, filière, keyword)
-                    VALUES(:nom, :prenoms, :prenom_usuel, :email, :promotions, :ecole, :filiere, SHA2(:keyword, 256))');
+            if($this->verifierEtudiants($verifier) ===0) {
+                $database=Database::db_connect();
+                $demande=$database->prepare('INSERT INTO etudiants(nom, prenoms, prenom_usuel, email, promotions,
+                        ecole_superieure, filiere, foyer, keyword)
+                    VALUES(:nom, :prenoms, :prenom_usuel, :email, :promotions, :ecole, :filiere, :foyer, SHA2(:keyword, 256))');
                 $demande->execute($donnees);
-                $database->commit();
                 $status = '1';
             }
             else $status = '0';
@@ -154,7 +156,6 @@ class Impressions extends Database {
                 VALUES(:messages, :fichiers, NOW(), :id_etudiant)
             ');
             $demande->execute($donnees);
-            $database->commit();
         }
         catch(PDOException $e) {
             $database->rollBack();

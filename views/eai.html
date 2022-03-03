@@ -33,8 +33,10 @@
                                 alt="" width="50" height="50" style="background: #FFFFFF;"> 
                             <span class="ms-4 titre" style="color: #FFFFFF;">E.A.I</span>
                         </h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
+                        <button type="button" class="text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </button>
                     </div>
 
                     <div class="offcanvas-body">
@@ -42,8 +44,8 @@
                             <li class="nav-item dropdown ps-3 pe-3">
                                 <a id="navbarDropdownMenuLink" class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" 
                                     href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="" class="img-fluid rounded-circle me-4" alt="" width="60" height="60">
-                                    <span id="nomSession" class="fs-4" style="color: #FFFFFF;">Lahatra</span>
+                                    <img id="photoSession" src="" class="img-fluid rounded-circle me-4" alt="" width="60" height="60">
+                                    <span id="nomSession" class="fs-4" style="color: #FFFFFF;"></span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li>
@@ -61,6 +63,68 @@
         </nav>
     </header>
     
+    <section class="pt-5 mt-4">
+        <div class="container mt-5 border border-3 p-3 rounded-3 shadow bg-primary bg-opacity-25">
+            <div class="row justify-content-between flex-md-nowrap mb-3">
+                <div class="col-12 col-md-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-pill ps-4" id="nomFichier" 
+                            placeholder="Nom du fichier(PDF) ***"
+                            style="border: 1px outset #057885;" required>
+                        <label for="nomFichier" class="form-label text-secondary ps-4">
+                            <i class="fa-solid fa-file-pdf" style="color: #057885;"></i> Nom du fichier(PDF): </label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-pill ps-4" id="nombrePage" 
+                            placeholder="Nombre de page ***"
+                            style="border: 1px outset #057885;" required>
+                        <label for="nombrePage" class="form-label text-secondary ps-4">
+                            <i class="fa-solid fa-file-lines" style="color: #057885;"></i> Nombre de page:</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-pill ps-4" id="nombreExemplaire" 
+                            placeholder="Nombre d'exemplaires ***"
+                            style="border: 1px outset #057885;" required>
+                        <label for="nombreExemplaire" class="form-label text-secondary ps-4">
+                            <i class="fa-solid fa-file" style="color: #057885;"></i> Nombre d'exemplaires:</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-pill ps-4" id="qualiteDocument"
+                            placeholder="Impressions(noir&blanc/couleur): ***"
+                            style="border: 1px outset #057885;" required>
+                        <label for="qualiteDocument" class="form-label text-secondary ps-4">
+                            <i class="fa-solid fa-fill-drip" style="color: #057885;"></i> Impressions(noir&blanc/couleur):</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">    
+                    <div class="form-floating mb-3">
+                        <select id="reliure" class="form-select rounded-3 ps-3 fs-5" 
+                        style="border: 1px outset #057885; color: #057885;" required>
+                            <option selected>Non</option>
+                            <option style="color: #057885;">Oui</option>
+                        </select>
+                        <label for="reliure" class="form-label text-secondary ps-4">
+                            <i class="fa-solid fa-book-open" style="color: #057885;"></i> Réliure</label>
+                    </div>
+    
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control rounded-3 ps-4" id="descriptions" 
+                            placeholder="Descriptions ***"
+                            style="border: 1px outset #057885; height: 186px;" required></textarea>
+                        <label for="descriptions" class="form-label text-secondary ps-4">
+                            <i class="fa-solid fa-comment" style="color: #057885;"></i> Descriptions ***</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3 justify-content-center">
+                <div id="excelFile" class="col-12 overflow-scroll"></div>
+            </div>
+        </div>
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../publics/js/jquery.min.js"></script>

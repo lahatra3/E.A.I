@@ -2,10 +2,12 @@
 class ControllersAdd {
 
     public function ajouterEtudiants(string $nom, string $prenoms, string $prenom_usuel, 
-     string $email, string $promotions, string $ecole, string $filiere, string $keyword) {
+     string $email, string $promotions, string $ecole, string $filiere, string $foyer, string $keyword) {
+         
         if(!empty(trim($nom)) && !empty(trim($prenoms)) && !empty(trim($prenom_usuel)) &&
         !empty(trim($email)) && !empty(trim($promotions)) && !empty(trim($ecole)) &&
-        !empty(trim($filiere)) && !empty(trim($keyword))) {
+        !empty(trim($filiere)) && !empty(trim($foyer)) && !empty(trim($keyword))) {
+
             $infos = [
                 'nom' => strip_tags(trim($nom)),
                 'prenoms' => strip_tags(ucwords($prenoms)),
@@ -14,6 +16,7 @@ class ControllersAdd {
                 'promotions' => strip_tags(trim($promotions)),
                 'ecole' => strip_tags(trim($ecole)),
                 'filiere' => strip_tags(trim($filiere)),
+                'foyer' => strip_tags(trim($foyer)),
                 'keyword' => $keyword
             ];
             $infosVerifier=[
