@@ -102,7 +102,10 @@ try{
                                 $excel->getDataExcel();
                             break;
                             case 'add':
-                                $excel->addDataExcel();
+                                $excel->addDataExcel($_POST['nomEtudiant'], $_POST['esEtudiant'],
+                                 $_POST['promotionsEtudiant'], $_POST['foyerEtudiant'], $_POST['nomFichier'], 
+                                 $_POST['nombrePage'], $_POST['nombreExemplaire'], $_POST['qualiteDocument'], 
+                                 $_POST['reliure'], $_POST['descriptions']);
                             break;
                             default: throw new Exception("Erreur: la demande n'existe pas ! URL $url[0]/$url[1] introuvable.");
                         }
