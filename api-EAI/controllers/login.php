@@ -1,10 +1,9 @@
 <?php
 class ControllerLogin{
-    
     public function authSession(string $identifiant, string $keyword, string $secret) {
         $donnees = [
             'identifiant' => strip_tags(trim($identifiant)),
-            'keyword' => strip_tags(trim($keyword))
+            'keyword' => $keyword
         ];
         $login = new Login;
         $reponses = $login->authEtudiants($donnees);
