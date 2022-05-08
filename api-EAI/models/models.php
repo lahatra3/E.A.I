@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = '';
-    private $database = '';
-    private $user = '';
-    private $password = '';
+    private $host = 'localhost';
+    private $database = 'eai';
+    private $user = 'jitiy';
+    private $password = '01Lah_tr*@ro0t/*';
 
     protected function db_connect() {
         try{
