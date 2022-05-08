@@ -175,7 +175,7 @@ class Login extends Database {
     public function authEtudiants(array $donnees): array | bool {
         try {
             $database = Database::db_connect();
-            $demande = $database->prepare('SELECT True, id, prenom_usuel, email
+            $demande = $database->prepare('SELECT True, id, prenom_usuel
                 FROM etudiants
                 WHERE (email = :identifiant OR prenom_usuel = :identifiant) 
                     AND keyword = SHA2(:keyword, 256)');

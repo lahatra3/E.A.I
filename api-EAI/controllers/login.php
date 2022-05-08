@@ -1,30 +1,30 @@
 <?php
-class ControllersLogin{
-    public function apiLogin($identifiant, $keyword){
-        $infos = [
-            'identifiant' => strip_tags($identifiant),
-            'keyword' => $keyword
+class ControllerLogin{
+    
+    public function authSession(string $identifiant, string $keyword, string $secret) {
+        $donnees = [
+            'identifiant' => strip_tags(trim($identifiant)),
+            'keyword' => strip_tags(trim($keyword))
         ];
-        $auth = new Login();
-        $resultats = $auth -> authentifier($infos);
-        unset($auth);
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
-    }
-
-    public function sessionLogin($identifiant, $keyword) {
-        $infos = [
-            'identifiant' => strip_tags($identifiant),
-            'keyword' => $keyword
-        ];
-        $auth = new Login();
-        $resultats = $auth -> authentifier($infos);
-        unset($auth);
-        $_SESSION['true'] = $resultats['true'];
-        $_SESSION['prenom_usuel'] = $resultats['prenom_usuel'];
-        print_r(json_encode($resultats, JSON_FORCE_OBJECT));
-    }
-
-    public function getSession() {
-        print_r(json_encode($_SESSION, JSON_FORCE_OBJECT));
+        $login = new Login;
+        $reponses = $login->authEtudiants($donnees);
+        unset($login);
+        if($reponses) {
+            if(intval($reponses['TRUE']) === 1) {
+                $header = json_decode(file_get_contents('./controllers/jwt-header.json'), true);
+                $token = new JWT;
+                $reponses['token'] = $token->generateToken($header, $reponses, $secret, 84600);
+                unset($token);
+                print_r(json_encode($reponses));
+            }
+            else {
+                throw new Exception("Erreur: Les identifiants sont incorrects ...!");
+                http_response_code(402);
+            }
+        }
+        else {
+            throw new Exception("Erreur: Les identifiants sont incorrects ...!");
+            http_response_code(402);
+        }
     }
 }

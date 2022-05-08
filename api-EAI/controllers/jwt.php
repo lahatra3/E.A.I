@@ -32,7 +32,6 @@ class JWT {
             $resultats = [
                 'id' => $donnees['id'],
                 'prenom_usuel' => $donnees['prenom_usuel'],
-                'mail' => $donnees['mail']
             ];
         }
         else {
