@@ -1,15 +1,20 @@
 <?php
-class Database {
-    private $host = 'localhost';
-    private $database = 'eai';
-    private $user = 'jitiy';
-    private $password = '01Lah_tr*@ro0t/*';
+abstract class Database {
+
+    public function __construct() {
+        $eric = json_decode(file_get_contents('./models/db.json'));
+        $this->host = $eric->host;
+        $this->dbname = $eric->dbname;
+        $this->user = $eric->user;
+        $this->password = $eric->password;
+    } 
 
     protected function db_connect() {
-        try{
+        try {
             return new PDO("mysql:host=$this->host; dbname=".$this->database."; charset=utf8", 
                 $this->user, $this->password, 
-                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+            );
         }
         catch(PDOException $e) {
             print_r(json_encode([
